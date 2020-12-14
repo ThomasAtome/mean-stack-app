@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ApiService} from "../api/api.service";
 import {Sale} from "../../models/sale.model";
 import {map} from "rxjs/operators";
@@ -42,6 +42,36 @@ export class SaleService {
   }
 
   /**
+   * Method for add a new sale on the DB
+   * @param sale
+   */
+  addSale(sale: any) {
+
+    return new Promise(
+      (res, rej) => {
+
+        const headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+
+        this.http
+          .post(ApiService.saleURL(), sale, {headers})
+          .subscribe(
+            info => {
+              console.info(info);
+              res(info);
+            },
+            err => {
+              console.error(err);
+              rej(err);
+            }
+          )
+
+      }
+    );
+
+  }
+
+  /**
    * Method for delete the selected sale on the DB
    * @param id
    */
@@ -70,7 +100,8 @@ export class SaleService {
           )
 
       }
-    )
+    );
 
   }
+
 }

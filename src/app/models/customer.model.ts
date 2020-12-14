@@ -52,4 +52,13 @@ export class Customer {
       data.satisfaction
     );
   }
+
+  toJSON(): any {
+    return {
+      gender: this.gender,
+      age: this.age,
+      email: this.email,
+      satisfaction: this.satisfaction
+    }
+  }
 }

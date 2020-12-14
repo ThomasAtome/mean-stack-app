@@ -10,8 +10,10 @@ export class Sale {
   private _couponUsed: boolean;
   private _purchaseMethod: string;
 
-  constructor(id: string, saleDate: Date, items: Array<any>, storeLocation: string, customer: Customer, couponUsed: boolean, purchaseMethod: string) {
-    this._id = id;
+  constructor(saleDate: Date, items: Array<any>, storeLocation: string, customer: Customer, couponUsed: boolean, purchaseMethod: string, id?: string) {
+    if(id) {
+      this._id = id;
+    }
     this._saleDate = saleDate;
     this._items = items;
     this._storeLocation = storeLocation;
@@ -78,13 +80,24 @@ export class Sale {
 
   static fromJSON(data: any): Sale {
     return new Sale(
-      data._id,
       data.saleDate,
       data.items,
       data.storeLocation,
       Customer.fromJSON(data.customer),
       data.couponUsed,
-      data.purchaseMethod
+      data.purchaseMethod,
+      data._id
     );
+  }
+
+  toJSON(): any {
+    return {
+      saleDate: this.saleDate,
+      items: this.items,
+      storeLocation: this.storeLocation,
+      customer: this.customer.toJSON(),
+      couponUsed: this.couponUsed,
+      purchaseMethod: this.purchaseMethod
+    }
   }
 }
