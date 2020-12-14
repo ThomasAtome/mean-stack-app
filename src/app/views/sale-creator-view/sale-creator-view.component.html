@@ -1,0 +1,179 @@
+<div class="row">
+
+  <div class="col-8 ml-auto mr-auto text-center shadow">
+
+    <div class="text-center">
+      <h2 class="text-uppercase">NOUVELLE VENTE</h2>
+    </div>
+
+    <form class="mt-4" [formGroup]="newSaleForm" (ngSubmit)="onSubmitNewSaleForm()">
+
+      <div class="row">
+
+        <div class="col-6">
+
+          <h5>Vente</h5>
+
+          <div class="form-group">
+            <div class="text-left">
+              <label>Date Vente</label>
+              <input type="text"
+                     class="form-control"
+                     placeholder="JJ/MM/AAAA*"
+                     formControlName="saleDate"
+                     [(ngModel)]="sale.saleDate"/>
+            </div>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="(newSaleForm.controls.saleDate.dirty || newSaleForm.controls.saleDate.touched)
+              && newSaleForm.controls.saleDate.invalid
+              && newSaleForm.controls.saleDate.errors.required">
+            Vous devez renseigner la date de vente.
+          </div>
+
+          <div class="form-group">
+            <div class="text-left">
+              <label>Lieu Vente</label>
+              <input type="text"
+                     class="form-control"
+                     placeholder="Ville*"
+                     formControlName="storeLocation"
+                     [(ngModel)]="sale.storeLocation"/>
+            </div>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="(newSaleForm.controls.storeLocation.dirty || newSaleForm.controls.storeLocation.touched)
+              && newSaleForm.controls.storeLocation.invalid
+              && newSaleForm.controls.storeLocation.errors.required">
+            Vous devez renseigner le lieu de vente.
+          </div>
+
+          <div class="form-group">
+            <div class="text-left">
+              <label>Coupon Promo ?</label>
+              <input type="checkbox"
+                     class="form-control"
+                     formControlName="couponUsed"
+                     [(ngModel)]="sale.couponUsed"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="text-left">
+              <label>Méthode Achat</label>
+              <input type="text"
+                     class="form-control"
+                     placeholder="Méthode Achat*"
+                     formControlName="purchaseMethod"
+                     [(ngModel)]="sale.purchaseMethod"/>
+            </div>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="(newSaleForm.controls.purchaseMethod.dirty || newSaleForm.controls.purchaseMethod.touched)
+              && newSaleForm.controls.purchaseMethod.invalid
+              && newSaleForm.controls.purchaseMethod.errors.required">
+            Vous devez renseigner la méthode d'achat.
+          </div>
+
+        </div>
+
+        <div class="col-6">
+
+          <div formGroupName="customer">
+
+            <h5>Client</h5>
+
+            <div class="form-group">
+              <div class="text-left">
+                <label>Sexe</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Sexe*"
+                       formControlName="gender"
+                       [(ngModel)]="sale.customer.gender"/>
+              </div>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="(newSaleForm.controls.customer['controls'].gender.dirty || newSaleForm.controls.customer['controls'].gender.touched)
+              && newSaleForm.controls.customer['controls'].gender.invalid
+              && newSaleForm.controls.customer['controls'].gender.errors.required">
+              Vous devez renseigner le sexe du client.
+            </div>
+
+            <div class="form-group">
+              <div class="text-left">
+                <label>Âge</label>
+                <input type="number"
+                       class="form-control"
+                       placeholder="Âge*"
+                       formControlName="age"
+                       [(ngModel)]="sale.customer.age"/>
+              </div>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="(newSaleForm.controls.customer['controls'].age.dirty || newSaleForm.controls.customer['controls'].age.touched)
+              && newSaleForm.controls.customer['controls'].age.invalid
+              && newSaleForm.controls.customer['controls'].age.errors.required">
+              Vous devez renseigner l'âge du client.
+            </div>
+
+            <div class="form-group">
+              <div class="text-left">
+                <label>Email</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Email*"
+                       formControlName="email"
+                       [(ngModel)]="sale.customer.email"/>
+              </div>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="(newSaleForm.controls.customer['controls'].email.dirty || newSaleForm.controls.customer['controls'].email.touched)
+              && newSaleForm.controls.customer['controls'].email.invalid
+              && newSaleForm.controls.customer['controls'].email.errors.required">
+              Vous devez renseigner l'email du client.
+            </div>
+
+            <div class="form-group">
+              <div class="text-left">
+                <label>Satisfaction</label>
+                <input type="number"
+                       class="form-control"
+                       placeholder="Satisfaction*"
+                       formControlName="satisfaction"
+                       [(ngModel)]="sale.customer.satisfaction"/>
+              </div>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="(newSaleForm.controls.customer['controls'].satisfaction.dirty || newSaleForm.controls.customer['controls'].satisfaction.touched)
+              && newSaleForm.controls.customer['controls'].satisfaction.invalid
+              && newSaleForm.controls.customer['controls'].satisfaction.errors.required">
+              Vous devez renseigner la satisfaction du client.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <button
+        class="btn btn-danger btn-block rounded mt-4"
+        [disabled]="newSaleForm.invalid">
+        AJOUTER
+      </button>
+
+    </form>
+
+    <button routerLink="/sales" class="mt-3 mb-4 btn rounded">Revenir aux ventes</button>
+
+  </div>
+
+</div>
