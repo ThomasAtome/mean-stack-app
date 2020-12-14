@@ -1,0 +1,90 @@
+<div class="row">
+
+  <div *ngIf="sale" class="col-10 mr-auto ml-auto">
+
+    <div class="text-center">
+      <h4 class="text-uppercase">VENTE {{sale.id}}</h4>
+    </div>
+
+    <div class="row">
+
+      <div class="col-6 text-left">
+
+        <div class="card border-0">
+          <div class="card-body">
+            <h5 class="card-title">Client</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{sale.customer.gender}} - {{sale.customer.age}}ans</h6>
+            <p class="card-text">{{sale.customer.email}}</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-6 text-right">
+
+        <div class="card border-0">
+          <div class="card-body">
+            <h5 class="card-title">Vente</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Date d'achat: {{sale.saleDate | date}}</h6>
+            <p class="card-text">
+              Coupon Promo: {{sale.couponUsed ? '✅' : '❌'}}
+              <br>
+              Achat effectué {{sale.purchaseMethod}}
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-12 mr-auto ml-auto">
+
+        <table class="table">
+
+          <thead>
+
+            <tr>
+              <th scope="col">Article</th>
+              <th scope="col">Quantité</th>
+              <th scope="col">Prix</th>
+              <th scope="col" class="text-right">Total</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+          <tr *ngFor="let item of sale.items">
+            <td scope="row">{{item.name}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{formattedPrice(item.price.$numberDecimal)}}</td>
+            <td class="text-right">{{formattedPrice(getTotalItem(item.quantity, item.price.$numberDecimal))}}</td>
+          </tr>
+
+          </tbody>
+
+        </table>
+
+        <div class="bg-success rounded d-flex justify-content-between mt-4 p-2">
+          <div class="font-weight-bold">
+            Total payé
+          </div>
+          <div>
+            {{getTotalAmount(sale)}}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="mt-3 mb-4">
+      <button routerLink="/sales" class="btn rounded">Revenir aux ventes</button>
+    </div>
+
+  </div>
+
+</div>

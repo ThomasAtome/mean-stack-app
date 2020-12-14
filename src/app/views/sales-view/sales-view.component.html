@@ -35,6 +35,12 @@
         <td scope="col">{{sale.purchaseMethod}}</td>
         <td scope="col">
           <button
+            routerLink="/sale/{{sale.id}}"
+            class="btn btn-success rounded text-uppercase mr-1">Détails</button>
+          <button
+            routerLink="/edit/sale/{{sale.id}}"
+            class="btn btn-warning rounded text-uppercase mr-1">Modifier</button>
+          <button
             (click)="onClickDeleteBtn(sale.id)"
             class="btn btn-danger rounded text-uppercase">Supprimer</button>
         </td>

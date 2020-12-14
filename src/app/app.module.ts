@@ -9,12 +9,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from "@angular/common/http";
 import { SaleCreatorViewComponent } from './views/sale-creator-view/sale-creator-view.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { SaleEditorViewComponent } from './views/sale-editor-view/sale-editor-view.component';
+import { SaleViewComponent } from './views/sale-view/sale-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SalesViewComponent,
-    SaleCreatorViewComponent
+    SaleCreatorViewComponent,
+    SaleEditorViewComponent,
+    SaleViewComponent
   ],
   imports: [
     BrowserModule,
