@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {ApiService} from "../api/api.service";
-import {Sale} from "../../models/sale.model";
-import {map} from "rxjs/operators";
-import {BehaviorSubject} from "rxjs";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ApiService} from '../api/api.service';
+import {Sale} from '../../models/sale.model';
+import {map} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +22,14 @@ export class SaleService {
    */
   getAll(): void {
 
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', ApiService.token);
+
     this.http
-      .get(ApiService.salesURL())
+      .get(ApiService.salesURL(), {headers})
       .pipe(
         map((res: any) => {
-          return res.map(item => Sale.fromJSON(item))
+          return res.map(item => Sale.fromJSON(item));
         })
       )
       .subscribe(
@@ -50,8 +53,11 @@ export class SaleService {
     return new Promise(
       (res, rej) => {
 
+        let headers = new HttpHeaders();
+        headers = headers.append('Authorization', ApiService.token);
+
         this.http
-          .get(ApiService.saleURL() + id)
+          .get(ApiService.saleURL() + id, {headers})
           .subscribe(
             (sale: Sale) => {
               res(Sale.fromJSON(sale));
@@ -60,7 +66,7 @@ export class SaleService {
               console.error(err);
               rej(err);
             }
-          )
+          );
 
       }
     );
@@ -71,13 +77,14 @@ export class SaleService {
    * Method for add a new sale on the DB
    * @param sale
    */
-  addSale(sale: any) {
+  addSale(sale: any): Promise<any> {
 
     return new Promise(
       (res, rej) => {
 
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
+        let headers = new HttpHeaders();
+        headers = headers.append('Authorization', ApiService.token);
+        headers = headers.append('Content-Type', 'application/json');
 
         this.http
           .post(ApiService.saleURL(), sale, {headers})
@@ -90,7 +97,7 @@ export class SaleService {
               console.error(err);
               rej(err);
             }
-          )
+          );
 
       }
     );
@@ -105,8 +112,9 @@ export class SaleService {
     return new Promise(
       (res, rej) => {
 
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
+        let headers = new HttpHeaders();
+        headers = headers.append('Authorization', ApiService.token);
+        headers = headers.append('Content-Type', 'application/json');
 
         this.http
           .put(ApiService.saleURL() + id, editedSale, {headers})
@@ -119,7 +127,7 @@ export class SaleService {
               console.error(err);
               rej(err);
             }
-          )
+          );
 
       }
     );
@@ -135,12 +143,15 @@ export class SaleService {
     return new Promise(
       (res, rej) => {
 
+        let headers = new HttpHeaders();
+        headers = headers.append('Authorization', ApiService.token);
+
         this.http
-          .delete(ApiService.saleURL() + id)
+          .delete(ApiService.saleURL() + id, {headers})
           .subscribe(
             info => {
-              for(let i = 0; i < this.salesData.length; i++) {
-                if(this.salesData[i].id === id) {
+              for (let i = 0; i < this.salesData.length; i++) {
+                if (this.salesData[i].id === id) {
                   this.salesData.splice(i, 1);
                   break;
                 }
@@ -152,7 +163,7 @@ export class SaleService {
               console.error(err);
               rej(err);
             }
-          )
+          );
 
       }
     );

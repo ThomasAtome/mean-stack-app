@@ -1,4 +1,4 @@
-import {Customer} from "./customer.model";
+import {Customer} from './customer.model';
 
 export class Sale {
 
@@ -11,7 +11,7 @@ export class Sale {
   private _purchaseMethod: string;
 
   constructor(saleDate: Date, items: Array<any>, storeLocation: string, customer: Customer, couponUsed: boolean, purchaseMethod: string, id?: string) {
-    if(id) {
+    if (id) {
       this._id = id;
     }
     this._saleDate = saleDate;
@@ -98,6 +98,6 @@ export class Sale {
       customer: this.customer.toJSON(),
       couponUsed: this.couponUsed,
       purchaseMethod: this.purchaseMethod
-    }
+    };
   }
 }

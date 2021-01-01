@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {SaleService} from "../../services/sale/sale.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Sale} from "../../models/sale.model";
+import {ActivatedRoute, Router} from '@angular/router';
+import {SaleService} from '../../services/sale/sale.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Sale} from '../../models/sale.model';
 
 @Component({
   selector: 'app-sale-editor-view',
@@ -41,7 +41,7 @@ export class SaleEditorViewComponent implements OnInit {
   private initForm(): void {
 
     this.editedSaleForm = this.formBuilder.group({
-      saleDate: [this.formattedDate(new Date(this.sale.saleDate)), [Validators.required, Validators.pattern(/^(0[1-9]|1[012])\/(0[1-9]|1[012])\/\d{4}$/)]],
+      saleDate: [this.formattedDate(new Date(this.sale.saleDate)), [Validators.required, Validators.pattern(/^(0[1-9]|[1-2][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4}$/)]],
       storeLocation: ['', Validators.required],
       customer: this.formBuilder.group({
         gender: ['', Validators.required],
@@ -58,14 +58,14 @@ export class SaleEditorViewComponent implements OnInit {
   /**
    * Method called when the user submit an edited sale
    */
-  onSubmitEditedSaleForm() {
+  onSubmitEditedSaleForm(): void {
     this.sale.saleDate = new Date(this.editedSaleForm.value.saleDate);
     this.sale.items = undefined;
 
     this.saleService.updateSaleById(this.sale.id, this.sale.toJSON())
       .then(() => {
-        this.router.navigate(['/']);
-      })
+        this.router.navigate(['/sales']);
+      });
 
   }
 

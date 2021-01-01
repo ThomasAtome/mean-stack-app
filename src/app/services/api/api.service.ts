@@ -7,7 +7,16 @@ export class ApiService {
 
   static rootURL = 'http://localhost';
 
-  constructor() { }
+  static token: string;
+
+  constructor() {}
+
+  /**
+   * Return URL for auth API route
+   */
+  static authURL(): string {
+    return `${ApiService.rootURL}/`;
+  }
 
   /**
    * Return URL for sales API route
